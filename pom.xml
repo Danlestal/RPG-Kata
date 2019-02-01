@@ -14,12 +14,80 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <powermock.version>1.7.1</powermock.version>
+		<lwjgl.version>3.2.1</lwjgl.version>
+		<lwjgl.natives>natives-macos</lwjgl.natives>
   </properties>
 
   <dependencies>
+    <dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl</artifactId>
+			<version>${lwjgl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-assimp</artifactId>
+			<version>${lwjgl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-glfw</artifactId>
+			<version>${lwjgl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-openal</artifactId>
+			<version>${lwjgl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-opengl</artifactId>
+			<version>${lwjgl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-stb</artifactId>
+			<version>${lwjgl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl</artifactId>
+			<version>${lwjgl.version}</version>
+			<classifier>${lwjgl.natives}</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-assimp</artifactId>
+			<version>${lwjgl.version}</version>
+			<classifier>${lwjgl.natives}</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-glfw</artifactId>
+			<version>${lwjgl.version}</version>
+			<classifier>${lwjgl.natives}</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-openal</artifactId>
+			<version>${lwjgl.version}</version>
+			<classifier>${lwjgl.natives}</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-opengl</artifactId>
+			<version>${lwjgl.version}</version>
+			<classifier>${lwjgl.natives}</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-stb</artifactId>
+			<version>${lwjgl.version}</version>
+			<classifier>${lwjgl.natives}</classifier>
+		</dependency>
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>
