@@ -8,7 +8,21 @@
             "type": "java",
             "name": "Debug (Launch) - Simple Window",
             "request": "launch",
-            "mainClass": "kata.rpg.HelloWorld",
+            "mainClass": "kata.HelloWorld",
+            "vmArgs": "-XstartOnFirstThread",
+        },
+        {
+            "type": "java",
+            "name": "WRAPPER",
+            "request": "launch",
+            "mainClass": "kata.lwjgl.Main",
+            "vmArgs": "-XstartOnFirstThread",
+        },
+        {
+            "type": "java",
+            "name": "RPG Game",
+            "request": "launch",
+            "mainClass": "kata.Main",
             "vmArgs": "-XstartOnFirstThread",
         },
         {

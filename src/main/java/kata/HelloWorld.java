@@ -1,4 +1,4 @@
-package kata.rpg;
+package kata;
 
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
