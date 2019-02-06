@@ -58,6 +58,12 @@ public class GameState implements State {
         Order newMovementOrder = new MoveOrder(new Vector2f(0, 0));
         ordersComponent.addOrder(newMovementOrder);
 
+        Order otherMovementOrder = new MoveOrder(new Vector2f(200, 50));
+        ordersComponent.addOrder(otherMovementOrder);
+
+        Order anotherMovementOrder = new MoveOrder(new Vector2f(600, 500));
+        ordersComponent.addOrder(anotherMovementOrder);
+
 
         this.actorList.add(targetActor);
 

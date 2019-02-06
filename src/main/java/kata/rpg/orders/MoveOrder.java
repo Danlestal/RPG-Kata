@@ -7,8 +7,8 @@ import kata.rpg.components.BidimensionalPositionComponent;
 public class MoveOrder extends Order {
 
     private BidimensionalPositionComponent positionComponent;
-    private static final float moveOrderThreshold = 1;
-    private float moveOrderStep = 10;
+    private static final float moveOrderThreshold = 8;
+    private float moveOrderStep = 5;
     private Vector2f destination;
 
     public MoveOrder( Vector2f destination) {
