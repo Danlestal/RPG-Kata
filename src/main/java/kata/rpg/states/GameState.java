@@ -31,19 +31,6 @@ public class GameState implements State {
 
     @Override
     public void enter() {
-        /*
-        //Esto es algo del renderer
-        int width, height;
-        try (MemoryStack stack = MemoryStack.stackPush()) {
-            long window = GLFW.glfwGetCurrentContext();
-            IntBuffer widthBuffer = stack.mallocInt(1);
-            IntBuffer heightBuffer = stack.mallocInt(1);
-            GLFW.glfwGetFramebufferSize(window, widthBuffer, heightBuffer);
-            width = widthBuffer.get();
-            height = heightBuffer.get();
-        }
-        glClearColor(0.5f, 0.5f, 0.5f, 1f);
-
         // Esto son recursos estaticos*/
         Texture texture = Texture.loadTexture("resources/pong.png");
         texture.bind();
@@ -58,8 +45,8 @@ public class GameState implements State {
 
         // Actores*/
         Actor targetActor = new Actor();
-        BidimensionalPositionComponent.addComponentToActor(targetActor, new Vector2f(5, 430));
-        RenderData data = new RenderData(Color.RED,
+        BidimensionalPositionComponent.addComponentToActor(targetActor, new Vector2f(400, 300));
+        RenderData data = new RenderData(Color.BLACK,
                                             texture,
                                             20, 
                                             100,
