@@ -31,7 +31,35 @@ public class GameState implements State {
 
     @Override
     public void enter() {
-        System.out.println("Iniciando el juego");
+        /*
+        //Esto es algo del renderer
+        int width, height;
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            long window = GLFW.glfwGetCurrentContext();
+            IntBuffer widthBuffer = stack.mallocInt(1);
+            IntBuffer heightBuffer = stack.mallocInt(1);
+            GLFW.glfwGetFramebufferSize(window, widthBuffer, heightBuffer);
+            width = widthBuffer.get();
+            height = heightBuffer.get();
+        }
+        glClearColor(0.5f, 0.5f, 0.5f, 1f);
+
+        // Esto son recursos estaticos
+        texture = Texture.loadTexture("resources/pong.png");
+
+
+        // Ctes de juego
+        float speed = 250f;
+        playerScore = 0;
+        opponentScore = 0;
+        gameWidth = width;
+        gameHeight = height;
+
+        // Actores
+        player = new Paddle(Color.GREEN, texture, 5f, (height - 100) / 2f, speed, true);
+        opponent = new Paddle(Color.RED, texture, width - 25f, (height - 100) / 2f, speed, false);
+        ball = new Ball(Color.BLUE, texture, (width - 20) / 2f, (height - 20) / 2f, speed * 1.5f);
+        */
     }
 
     @Override

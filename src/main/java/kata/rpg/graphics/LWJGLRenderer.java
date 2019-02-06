@@ -7,6 +7,12 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 import kata.lwjgl.core.Game;
+import kata.lwjgl.graphic.Color;
+import kata.lwjgl.graphic.Shader;
+import kata.lwjgl.graphic.ShaderProgram;
+import kata.lwjgl.graphic.Texture;
+import kata.lwjgl.graphic.VertexArrayObject;
+import kata.lwjgl.graphic.VertexBufferObject;
 import kata.lwjgl.graphic.Window;
 import kata.lwjgl.math.Matrix4f;
 import kata.rpg.components.RenderComponent;
@@ -26,6 +32,7 @@ import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.GL_DYNAMIC_DRAW;
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
+import static org.lwjgl.opengl.GL11.glClearColor;
 
 
 
@@ -49,7 +56,6 @@ public class LWJGLRenderer implements Renderer {
 
     @Override
     public void init() {
-
         errorCallback = GLFWErrorCallback.createPrint();
         glfwSetErrorCallback(errorCallback);
         /* Initialize GLFW */
@@ -67,6 +73,15 @@ public class LWJGLRenderer implements Renderer {
         /* Enable blending */
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            long window = GLFW.glfwGetCurrentContext();
+            IntBuffer widthBuffer = stack.mallocInt(1);
+            IntBuffer heightBuffer = stack.mallocInt(1);
+            GLFW.glfwGetFramebufferSize(window, widthBuffer, heightBuffer);
+        }
+
+        glClearColor(0.5f, 0.5f, 0.5f, 1f);
     }
 
     @Override
@@ -85,12 +100,10 @@ public class LWJGLRenderer implements Renderer {
 
     @Override
     public void render(State state, float alpha) {
-        for( RenderComponent component : state.getRenderizableComponents() )
+        for(RenderComponent component : state.getRenderizableComponents())
         {
             component.render(this, alpha);
-
         }
-
     }
 
     /**
@@ -174,24 +187,6 @@ public class LWJGLRenderer implements Renderer {
         float t2 = 1f;
 
         drawTextureRegion(x1, y1, x2, y2, s1, t1, s2, t2, c);
-    }
-
-    /**
-     * Draws a texture region with the currently bound texture on specified
-     * coordinates.
-     *
-     * @param texture   Used for getting width and height of the texture
-     * @param x         X position of the texture
-     * @param y         Y position of the texture
-     * @param regX      X position of the texture region
-     * @param regY      Y position of the texture region
-     * @param regWidth  Width of the texture region
-     * @param regHeight Height of the texture region
-     * @param color
-     */
-    public void drawTextureRegion(Texture texture, float x, float y, float regX, float regY, float regWidth,
-            float regHeight, kata.lwjgl.graphic.Color color) {
-        drawTextureRegion(texture, x, y, regX, regY, regWidth, regHeight, Color.WHITE);
     }
 
     /**
@@ -404,11 +399,4 @@ public class LWJGLRenderer implements Renderer {
     public boolean isClosing() {
         return this.window.isClosing();
     }
-
-	public void drawTextureRegion(kata.lwjgl.graphic.Texture texture, float x, float y, int tx, int ty, int width,
-			int height, kata.lwjgl.graphic.Color color) {
-	}
-
-
-
 }

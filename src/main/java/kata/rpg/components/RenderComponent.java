@@ -33,6 +33,7 @@ public class RenderComponent extends Component {
     }
 
     public void render(LWJGLRenderer renderer, float alpha) {
+        //this.data.texture.bind();
         Vector2f interpolated = BidimensionalPositionComponent.getComponentFromActor(this.owner).lerp(alpha);
         renderer.drawTextureRegion( this.data.texture,
                                     interpolated.x,

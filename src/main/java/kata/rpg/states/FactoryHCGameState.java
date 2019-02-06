@@ -15,15 +15,16 @@ public class FactoryHCGameState {
         GameState state = new GameState();
 
         Actor targetActor = new Actor();
-        BidimensionalPositionComponent.addComponentToActor(targetActor, new Vector2f(0,0));
+        BidimensionalPositionComponent.addComponentToActor(targetActor, new Vector2f(5, 430));
         
         Texture texture = Texture.loadTexture("resources/pong.png");
+        texture.bind();
         RenderData data = new RenderData(Color.RED,
                                             texture,
-                                            5, 
-                                            (200 - 100) / 2,
-                                            2,
-                                            2);
+                                            20, 
+                                            100,
+                                            0,
+                                            0);
 
         RenderComponent.addComponentToActor(targetActor,data);
 

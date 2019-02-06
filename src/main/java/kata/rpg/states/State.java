@@ -1,15 +1,9 @@
 
 package kata.rpg.states;
-
-import kata.rpg.Actor;
 import kata.rpg.Game;
 import kata.rpg.components.RenderComponent;
 
-/**
- * States are used for the current game state.
- *
- * @author Heiko Brumme
- */
+
 public interface State {
 
     public void input();

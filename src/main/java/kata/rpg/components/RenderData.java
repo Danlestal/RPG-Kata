@@ -6,9 +6,9 @@ import kata.lwjgl.graphic.Texture;
 
 public class RenderData {
 
-    public RenderData(Color color, kata.lwjgl.graphic.Texture texture2, int width, int height, int tx, int ty){
+    public RenderData(Color color, Texture texture, int width, int height, int tx, int ty){
         this.color = color;
-        this.texture = texture2;
+        this.texture = texture;
         this.width = width;
         this.height = height;
         this.tx = tx;
