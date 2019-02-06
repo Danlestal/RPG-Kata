@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.opengl.GL;
 import kata.rpg.graphics.LWJGLRenderer;
-import kata.rpg.states.FactoryHCGameState;
 import kata.rpg.states.GameState;
 import kata.lwjgl.core.Timer;
 
@@ -35,10 +34,13 @@ public class Game {
     }
 
     public void init() {
+        // Start the render
         LWJGLRenderer renderer = new LWJGLRenderer();
         renderer.init();
 
-        state = FactoryHCGameState.create();
+        // Load a game level
+        state = new GameState();
+        state.enter();
 
         sceneRenderer = new SceneRender(renderer, state);
 
