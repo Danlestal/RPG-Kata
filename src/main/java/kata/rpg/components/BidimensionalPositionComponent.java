@@ -25,8 +25,12 @@ public class BidimensionalPositionComponent extends Component {
         this.position = position;
     }
 
-    public float distance(BidimensionalPositionComponent otherPosition) {
-        return this.position.subtract(otherPosition.position).length();
+    public float distance(BidimensionalPositionComponent otherPositionComponent) {
+        return this.distance(otherPositionComponent.position);
+    }
+
+    public float distance(Vector2f otherPosition) {
+        return this.position.subtract(otherPosition).length();
     }
 
     public Vector2f lerp(float alpha) {

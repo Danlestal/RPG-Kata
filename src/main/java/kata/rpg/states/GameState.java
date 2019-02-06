@@ -9,8 +9,11 @@ import kata.lwjgl.graphic.Texture;
 import kata.lwjgl.math.Vector2f;
 import kata.rpg.Actor;
 import kata.rpg.components.BidimensionalPositionComponent;
+import kata.rpg.components.OrdersExecutionComponent;
 import kata.rpg.components.RenderComponent;
 import kata.rpg.components.RenderData;
+import kata.rpg.orders.MoveOrder;
+import kata.rpg.orders.Order;
 
 public class GameState implements State {
 
@@ -27,23 +30,21 @@ public class GameState implements State {
 
     @Override
     public void update(float delta) {
+        for(Actor actor : this.actorList) {
+            OrdersExecutionComponent component = (OrdersExecutionComponent) actor.getComponent("OrdersExecutionComponent");
+            if ( component != null ){
+                component.updateOrders();
+            }
+        }
     }
 
     @Override
     public void enter() {
-        // Esto son recursos estaticos*/
+        // Esto son recursos estaticos 
         Texture texture = Texture.loadTexture("resources/pong.png");
         texture.bind();
 
-        /* Ctes de juego
-        float speed = 250f;
-        playerScore = 0;
-        opponentScore = 0;
-        gameWidth = width;
-        gameHeight = height;
-        */
-
-        // Actores*/
+        // Actores
         Actor targetActor = new Actor();
         BidimensionalPositionComponent.addComponentToActor(targetActor, new Vector2f(400, 300));
         RenderData data = new RenderData(Color.BLACK,
@@ -52,9 +53,15 @@ public class GameState implements State {
                                             100,
                                             0,
                                             0);
+        RenderComponent.addComponentToActor(targetActor,data);
+        OrdersExecutionComponent ordersComponent  = OrdersExecutionComponent.addComponentToActor(targetActor);
+        Order newMovementOrder = new MoveOrder(new Vector2f(0, 0));
+        ordersComponent.addOrder(newMovementOrder);
+
+
         this.actorList.add(targetActor);
 
-        RenderComponent.addComponentToActor(targetActor,data);
+
         
     }
 
