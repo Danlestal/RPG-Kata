@@ -17,7 +17,6 @@ import kata.rpg.orders.Order;
 
 public class GameState implements State {
 
-
     private List<Actor> actorList;
 
     public GameState() {
@@ -41,18 +40,19 @@ public class GameState implements State {
     @Override
     public void enter() {
         // Esto son recursos estaticos 
-        Texture texture = Texture.loadTexture("resources/pong.png");
+        Texture texture = Texture.loadTexture("resources/walkAnim.png");
+
         texture.bind();
 
         // Actores
         Actor targetActor = new Actor();
         BidimensionalPositionComponent.addComponentToActor(targetActor, new Vector2f(400, 300));
-        RenderData data = new RenderData(Color.BLACK,
+        RenderData data = new RenderData(Color.WHITE,
                                             texture,
-                                            20, 
-                                            100,
-                                            0,
-                                            0);
+                                            50, 
+                                            60,
+                                            50,
+                                            60);
         RenderComponent.addComponentToActor(targetActor,data);
         OrdersExecutionComponent ordersComponent  = OrdersExecutionComponent.addComponentToActor(targetActor);
         Order newMovementOrder = new MoveOrder(new Vector2f(0, 0));

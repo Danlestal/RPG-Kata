@@ -1,11 +1,9 @@
 
 package kata.rpg.components;
 
-
 import kata.lwjgl.math.Vector2f;
 import kata.rpg.Actor;
 import kata.rpg.graphics.LWJGLRenderer;
-
 
 public class RenderComponent extends Component {
 

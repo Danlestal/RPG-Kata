@@ -20,6 +20,14 @@ public class BidimensionalPositionComponent extends Component {
         return position;
     }
 
+    public void getDirectionVector() {
+        //TODO: returns the direction we are heading
+    }
+
+    public void getDirection() {
+        //TODO: returns one of the general 4 directions, will be used for animations.
+    }
+
     public void setPosition(Vector2f position){
         this.previousPosition = position;
         this.position = position;
