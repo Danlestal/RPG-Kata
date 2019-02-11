@@ -10,10 +10,12 @@ import kata.lwjgl.math.Vector2f;
 import kata.rpg.Actor;
 import kata.rpg.components.BidimensionalPositionComponent;
 import kata.rpg.components.OrdersExecutionComponent;
+import kata.rpg.components.PhysicsComponent;
 import kata.rpg.components.RenderComponent;
 import kata.rpg.components.RenderData;
 import kata.rpg.orders.MoveOrder;
 import kata.rpg.orders.Order;
+import kata.rpg.physics.PhysEngine;
 
 public class GameState implements State {
 
@@ -35,6 +37,8 @@ public class GameState implements State {
                 component.updateOrders();
             }
         }
+
+        
     }
 
     @Override
@@ -68,7 +72,11 @@ public class GameState implements State {
         this.actorList.add(targetActor);
 
 
-        
+        // Actores
+        Actor otherActor = new Actor();
+        BidimensionalPositionComponent.addComponentToActor(otherActor, new Vector2f(100, 100));
+        RenderComponent.addComponentToActor(otherActor,data);
+        this.actorList.add(otherActor);
     }
 
     @Override
@@ -87,6 +95,10 @@ public class GameState implements State {
         }
         return result;
     }
+
+	public PhysicsComponent[] getPhysicsComponents() {
+		return null;
+	}
 
 
 
