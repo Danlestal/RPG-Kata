@@ -6,6 +6,14 @@ public class BoundingBox {
     public Vector2f min;
     public Vector2f max;
 
+    public BoundingBox(Vector2f min, Vector2f max){
+        this.min = min;
+        this.max = max;
+    }
+
+    public BoundingBox(Vector2f position, float width){
+        this.centerToPosition(position, width);
+    }
 
     public Vector2f diagonal(){
         return max.subtract(min);
@@ -25,10 +33,16 @@ public class BoundingBox {
         this.max = newCenter.add(gradient);
     }
 
-    public void updatePositions(Vector2f add){
+    public void centerToPosition(Vector2f newCenter, float width){
+        float halfWidth = width / 2;
+        Vector2f halfWidthVector = new Vector2f(halfWidth, halfWidth);
+        this.min = newCenter.subtract(halfWidthVector);
+        this.max = newCenter.add(halfWidthVector);
+    }
+
+    public void updatePosition(Vector2f add){
         this.min = this.min.add(add);
         this.max = this.max.add(add);
-
     }
     
     public Boolean collides(BoundingBox another) {

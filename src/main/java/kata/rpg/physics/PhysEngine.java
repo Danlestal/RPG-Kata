@@ -1,8 +1,5 @@
 package kata.rpg.physics;
 
-import java.util.List;
-
-import kata.rpg.components.PhysicsComponent;
 import kata.rpg.states.GameState;
 
 public class PhysEngine {
@@ -14,12 +11,10 @@ public class PhysEngine {
         this.state = state;
     }
 
+
     public void update(){
-        PhysicsComponent[] rigidBodies = state.getPhysicsComponents();
-        for(Collision collision : this.broadPhase.detectCollisions(rigidBodies)){
-            
+        for(Collision collision : this.broadPhase.detectCollisions(state.getPhysicsComponents())) {
+            System.out.println(String.format("collides! %s con %s ", collision.getFirstItem(), collision.getSecondItem()));
         }
-
     }
-
 }

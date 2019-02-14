@@ -5,5 +5,5 @@ import java.util.List;
 import kata.rpg.components.PhysicsComponent;
 
 public interface BroadPhase {
-    public List<Collision> detectCollisions(PhysicsComponent[] rigidBodies);
+    public List<Collision> detectCollisions(PhysicsComponent[] physComponents);
 }

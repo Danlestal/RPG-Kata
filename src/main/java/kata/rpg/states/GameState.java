@@ -1,28 +1,29 @@
 
 package kata.rpg.states;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import kata.lwjgl.graphic.Color;
 import kata.lwjgl.graphic.Texture;
 import kata.lwjgl.math.Vector2f;
 import kata.rpg.Actor;
-import kata.rpg.components.BidimensionalPositionComponent;
-import kata.rpg.components.OrdersExecutionComponent;
-import kata.rpg.components.PhysicsComponent;
-import kata.rpg.components.RenderComponent;
-import kata.rpg.components.RenderData;
+import kata.rpg.components.*;
 import kata.rpg.orders.MoveOrder;
 import kata.rpg.orders.Order;
+import kata.rpg.physics.BoundingBox;
+import kata.rpg.physics.NaiveBroadPhase;
 import kata.rpg.physics.PhysEngine;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameState implements State {
 
     private List<Actor> actorList;
+    private PhysEngine physics;
 
     public GameState() {
         this.actorList =  new ArrayList<Actor>();
+        physics = new PhysEngine(this, new NaiveBroadPhase());
+        
     }
 
     @Override
@@ -38,7 +39,7 @@ public class GameState implements State {
             }
         }
 
-        
+        physics.update();
     }
 
     @Override
@@ -50,7 +51,9 @@ public class GameState implements State {
 
         // Actores
         Actor targetActor = new Actor();
-        BidimensionalPositionComponent.addComponentToActor(targetActor, new Vector2f(400, 300));
+        Vector2f initialPosition = new Vector2f(400, 300);
+        BidimensionalPositionComponent.addComponentToActor(targetActor,initialPosition);
+        PhysicsComponent.addComponentToActor(targetActor, new BoundingBox(initialPosition, 20));
         RenderData data = new RenderData(Color.WHITE,
                                             texture,
                                             50, 
@@ -74,7 +77,9 @@ public class GameState implements State {
 
         // Actores
         Actor otherActor = new Actor();
-        BidimensionalPositionComponent.addComponentToActor(otherActor, new Vector2f(100, 100));
+        Vector2f otherPosition = new Vector2f(100, 100);
+        BidimensionalPositionComponent.addComponentToActor(otherActor, otherPosition);
+        PhysicsComponent.addComponentToActor(otherActor, new BoundingBox(otherPosition, 20));
         RenderComponent.addComponentToActor(otherActor,data);
         this.actorList.add(otherActor);
     }
@@ -97,8 +102,16 @@ public class GameState implements State {
     }
 
 	public PhysicsComponent[] getPhysicsComponents() {
-		return null;
+		ArrayList<PhysicsComponent> result = new ArrayList<PhysicsComponent>();
+        for(Actor actor : this.actorList) {
+            PhysicsComponent component = (PhysicsComponent) actor.getComponent("PhysicsComponent");
+            if ( component != null ){
+                result.add(component);
+            }
+        }
+        return result.toArray(new PhysicsComponent[0]);
 	}
+
 
 
 

@@ -8,23 +8,24 @@ import kata.rpg.components.PhysicsComponent;
 
 
 public class NaiveBroadPhase implements BroadPhase {
-    public List<Collision> detectCollisions(PhysicsComponent[] physComponent) {
+    @Override
+    public List<Collision> detectCollisions(PhysicsComponent[] physComponents) {
 
         List<Collision> result = new ArrayList<Collision>();
 
-        for (int i = 0; i < physComponent.length; i++)
+        for (int i = 0; i < physComponents.length -1; i++)
         {
-            BoundingBox firstBox = physComponent[i].getBoundingBox();
-            for (int e = i; e < physComponent.length; e++)
+            BoundingBox firstBox = physComponents[i].getBoundingBox();
+            for (int e = i + 1; e < physComponents.length; e++)
             {
-                BoundingBox secondBox = physComponent[e].getBoundingBox();
+                BoundingBox secondBox = physComponents[e].getBoundingBox();
                 if (firstBox.collides(secondBox)){
-                    result.add(new Collision(physComponent[i], physComponent[e]));
+                    result.add(new Collision(physComponents[i], physComponents[e]));
                 }
             }
         }
 
         return result;
-
     }
+
 }

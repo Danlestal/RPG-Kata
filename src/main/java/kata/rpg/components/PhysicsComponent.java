@@ -1,6 +1,5 @@
 package kata.rpg.components;
 
-import kata.lwjgl.math.Vector2f;
 import kata.rpg.Actor;
 import kata.rpg.physics.BoundingBox;
 
@@ -14,10 +13,6 @@ public class PhysicsComponent extends Component {
         this.box = box;
     }
 
-    public void syncWithPosition(BidimensionalPositionComponent positionComponent) {
-        Vector2f position = positionComponent.getPosition();
-        box.centerToPosition(position);
-    }
 
     public static PhysicsComponent addComponentToActor(Actor actor, BoundingBox position){
         PhysicsComponent component = new PhysicsComponent(position);

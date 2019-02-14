@@ -1,3 +1,5 @@
 .settings
 target
 .DS_store
+.idea
+rpg-kata.iml

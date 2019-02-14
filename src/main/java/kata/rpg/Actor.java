@@ -1,10 +1,10 @@
 
 package kata.rpg;
 
+import kata.rpg.components.Component;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import kata.rpg.components.Component;
 
 public class Actor {
 
@@ -24,5 +24,11 @@ public class Actor {
     public Component getComponent(String componentName) {
         return componentStorage.get(componentName);
     }
+
+    public void addUpdateMessage(Component sourceComponent, GameAction action) {
+
+    }
+
+
     
 }
