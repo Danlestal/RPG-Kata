@@ -2,7 +2,8 @@ package kata.rpg.components;
 
 import kata.lwjgl.math.Vector2f;
 import kata.rpg.Actor;
-import kata.rpg.PositionUpdateAction;
+import kata.rpg.eventsystem.GameEventType;
+import kata.rpg.eventsystem.events.PositionUpdateEvent;
 
 public class BidimensionalPositionComponent extends Component {
 
@@ -32,7 +33,7 @@ public class BidimensionalPositionComponent extends Component {
     public void setPosition(Vector2f position){
         this.previousPosition = position;
         this.position = position;
-        this.owner.addUpdateMessage(this, new PositionUpdateAction(this.previousPosition, this.position));
+        this.owner.propagateInternalEvent(GameEventType.POSITION_UPDATE, new PositionUpdateEvent(this.previousPosition, this.position));
     }
 
     public float distance(BidimensionalPositionComponent otherPositionComponent) {
