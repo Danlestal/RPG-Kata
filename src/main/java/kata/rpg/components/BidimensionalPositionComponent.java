@@ -3,7 +3,9 @@ package kata.rpg.components;
 import kata.lwjgl.math.Vector2f;
 import kata.rpg.Actor;
 import kata.rpg.eventsystem.GameEventType;
+import kata.rpg.eventsystem.events.HeadingUpdateEvent;
 import kata.rpg.eventsystem.events.PositionUpdateEvent;
+
 
 public class BidimensionalPositionComponent extends Component {
 
@@ -12,25 +14,47 @@ public class BidimensionalPositionComponent extends Component {
     private Vector2f previousPosition;
     private Vector2f position;
 
+    private Heading heading;
+    private Heading previousHeading;
+
     public BidimensionalPositionComponent(Vector2f position){
         super();
         this.previousPosition = position;
         this.position = position;
+        this.heading = Heading.DOWN;
+        this.previousHeading = Heading.DOWN;
     }
 
     public Vector2f getPosition() {
         return position;
     }
 
-    public void getDirectionVector() {
-        //TODO: returns the direction we are heading
-    }
+    public Heading getHeading(Vector2f normalizedVector) {
+        float xValue = Math.abs(normalizedVector.x);
+        float yValue = Math.abs(normalizedVector.y);
 
-    public void getDirection() {
-        //TODO: returns one of the general 4 directions, will be used for animations.
+        if (xValue >= yValue) {
+            if (normalizedVector.x <= 0)
+                return Heading.LEFT;
+            else
+                return Heading.RIGHT;
+        }
+        else {
+            if (normalizedVector.y <= 0)
+                return Heading.DOWN;
+            else
+                return Heading.UP;
+
+        }
     }
 
     public void setPosition(Vector2f position){
+        this.heading = this.getHeading(position.subtract(this.previousPosition).normalize());
+        if (this.heading != this.previousHeading) {
+            this.owner.propagateInternalEvent(GameEventType.HEADING_UPDATE, new HeadingUpdateEvent(this.heading));
+            this.previousHeading = this.heading;
+        }
+
         this.previousPosition = position;
         this.position = position;
         this.owner.propagateInternalEvent(GameEventType.POSITION_UPDATE, new PositionUpdateEvent(this.previousPosition, this.position));

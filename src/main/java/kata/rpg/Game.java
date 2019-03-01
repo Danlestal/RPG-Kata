@@ -1,12 +1,13 @@
 
 package kata.rpg;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.lwjgl.opengl.GL;
+import kata.lwjgl.core.Timer;
 import kata.rpg.graphics.LWJGLRenderer;
 import kata.rpg.states.GameState;
-import kata.lwjgl.core.Timer;
+import org.lwjgl.opengl.GL;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Game {

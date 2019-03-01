@@ -17,6 +17,19 @@ public class PhysicsComponent extends Component implements SubscribeComponent {
         this.box = box;
     }
 
+    public BoundingBox getBoundingBox() {
+        return box;
+    }
+
+    @Override
+    public void receiveEvent(GameEventType type, Event event) {
+        switch (type){
+            case POSITION_UPDATE:
+                PositionUpdateEvent posEvent = (PositionUpdateEvent) event;
+                this.box.centerToPosition(posEvent.getPosition());
+        }
+
+    }
 
     public static PhysicsComponent addComponentToActor(Actor actor, BoundingBox position){
         PhysicsComponent component = new PhysicsComponent(position);
@@ -32,17 +45,5 @@ public class PhysicsComponent extends Component implements SubscribeComponent {
         return (PhysicsComponent) component;
     }
 
-	public BoundingBox getBoundingBox() {
-		return box;
-	}
 
-    @Override
-    public void receiveEvent(GameEventType type, Event event) {
-        switch (type){
-            case POSITION_UPDATE:
-                PositionUpdateEvent posEvent = (PositionUpdateEvent) event;
-                this.box.centerToPosition(posEvent.getPosition());
-        }
-
-    }
 }
