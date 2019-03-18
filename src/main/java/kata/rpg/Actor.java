@@ -36,6 +36,6 @@ public class Actor {
     }
 
     public void propagateInternalEvent(GameEventType eventType, Event event) {
-        eventsHub.propagateEvent(GameEventType.POSITION_UPDATE, event);
+        eventsHub.propagateEvent(eventType, event);
     }
 }

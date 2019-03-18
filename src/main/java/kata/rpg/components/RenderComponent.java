@@ -6,6 +6,7 @@ import kata.rpg.Actor;
 import kata.rpg.eventsystem.Event;
 import kata.rpg.eventsystem.GameEventType;
 import kata.rpg.eventsystem.SubscribeComponent;
+import kata.rpg.eventsystem.events.HeadingUpdateEvent;
 import kata.rpg.graphics.LWJGLRenderer;
 
 public class RenderComponent extends Component implements SubscribeComponent {
@@ -33,7 +34,16 @@ public class RenderComponent extends Component implements SubscribeComponent {
 
     @Override
     public void receiveEvent(GameEventType type, Event event) {
+        switch (type){
+            case HEADING_UPDATE:
+                HeadingUpdateEvent headingEvent = (HeadingUpdateEvent) event;
+                this.changeTexture(headingEvent.getHeading());
+        }
 
+    }
+
+    private void changeTexture(Heading heading) {
+        System.out.println("Cambiando textura por el encaramiento");
     }
 
     public static RenderComponent addComponentToActor(Actor actor, RenderData data) {

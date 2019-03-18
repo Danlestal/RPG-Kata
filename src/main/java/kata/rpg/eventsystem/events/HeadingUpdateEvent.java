@@ -11,4 +11,9 @@ public class HeadingUpdateEvent extends Event {
         super();
         this.heading = heading;
     }
+
+
+    public Heading getHeading() {
+        return this.heading;
+    }
 }
